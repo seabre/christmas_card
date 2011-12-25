@@ -1,9 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
-require 'base64'
-require 'sanitize'
-require 'zlib'
 require 'dm-core'
 require 'dm-validations'
 require 'dm-migrations'
@@ -42,7 +39,7 @@ end
 class Card
   include DataMapper::Resource
   property :id,         Serial
-  property :to_thom,    Text, :required => true
+  property :to_whom,    Text, :required => true
   property :card_text,  Text, :required => true
   property :random_key, Text, :unique => true, :required => true
 
@@ -56,7 +53,7 @@ error do
   'Application error'
 end
 
-post '/' do
+post '/create_a_card' do
   #Make sure hash doesn't exist
   hsh = rand(MAX_NOTES).to_s(36)
   while Card.count(:random_key => hash) > 0
@@ -65,6 +62,7 @@ post '/' do
 
   card = Card.new
   card.attributes = {
+                      :to_whom => params[:to_whom],
                       :card_text => params[:card_text],
                       :random_key => hsh,
                     }
@@ -74,9 +72,17 @@ post '/' do
   
 end
 
+
+get '/create_a_card' do
+  erb :create_a_card
+end
+
+
 get '/' do
   erb :index
 end
+
+
  
 get '/:key' do 
   #Need to fix this?
@@ -85,12 +91,7 @@ get '/:key' do
   
   #else
     @card = Card.first(:random_key => params[:key])
-    erb :note
+    erb :index
   #end
 end
 
-#Doesn't work. fix later
-
-#get '/*.md' do
-#  Note.first(:random_key => params[:splat]).note_text
-#end

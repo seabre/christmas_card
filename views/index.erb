@@ -9,6 +9,7 @@
   <script src="javascripts/application.js"></script>
 
   <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="/favicon.ico" />
 
 </head>
 <body>
@@ -16,12 +17,14 @@
 <div class="center">
 <h1>Merry Christmas!</h1>
 </div>
-
+<% if !@card.nil? %>
 <div id="card">
-<%= @!card.blank? ? @card.to_whom + "," : "" %>
+<%= @card.to_whom + "," %>
 <br />
-<p><%= !@card.blank? ? @card.card_text : "" %></p>
+<p><%= @card.card_text %></p>
+<br />
+-Sean
 </div>
-
+<% end %>
 </body>
 </html>
