@@ -2,31 +2,26 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Baruch</title>
-  <link href='http://fonts.googleapis.com/css?family=Marko+One' rel='stylesheet' type='text/css'>
+  <title>Merry Christmas</title>
   <link href="stylesheets/style.css" rel="stylesheet" type="text/css" media="screen" />
-  <link rel="shortcut icon" href="/favicon.ico" />
+  <script src="javascripts/jquery-1.7.1.min.js"></script>
+  <script src="javascripts/snowfall.min.jquery.js"></script>
+  <script src="javascripts/application.js"></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
+
 <div class="center">
-<h1>Baruch</h1>
-
-<h2>Quick notes on the web. With <a href="http://daringfireball.net/projects/markdown/basics">Markdown</a>.</h2>
-
+<h1>Merry Christmas!</h1>
 </div>
 
-<div id="form" class="shadow">
-<form name="note_form" action="/" method="post">
-<div id="note" class="center">
-<textarea name="note_text" rows=20>
-Enter a note here in Markdown.
-</textarea>
-</div>
+<div id="card">
+<%= @!card.blank? ? @card.to_whom + "," : "" %>
 <br />
-<div id="submit" class="center">
-<a href='javascript:document.note_form.submit()'>Submit Note</a>  
+<p><%= !@card.blank? ? @card.card_text : "" %></p>
 </div>
-</form>
-</div>
+
 </body>
 </html>

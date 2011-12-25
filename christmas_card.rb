@@ -42,6 +42,7 @@ end
 class Card
   include DataMapper::Resource
   property :id,         Serial
+  property :to_thom,    Text, :required => true
   property :card_text,  Text, :required => true
   property :random_key, Text, :unique => true, :required => true
 
